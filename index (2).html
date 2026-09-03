@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>이솔지 — QA에서 개발자로</title>
+  <meta name="description" content="QA 4년 6개월 경험을 바탕으로 개발자로 전환 중인 이솔지의 포트폴리오 랜딩페이지. MockOTT 자동화 테스트, 전자 계산기 등 직접 만든 프로젝트를 소개합니다." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── TOKENS ────────────────────────────────────────────── */
+    :root {
+      --bg:        #0B0F1A;
+      --surface:   #141B2D;
+      --surface2:  #1C2540;
+      --border:    #252F4A;
+      --text:      #E2E8F4;
+      --muted:     #64748B;
+      --accent:    #00C896;
+      --accent-dk: #009C77;
+      --amber:     #F59E0B;
+      --amber-lt:  #FCD34D;
+      --danger:    #F43F5E;
+      --radius:    12px;
+      --radius-sm: 6px;
+      --font-display: 'Space Grotesk', 'Noto Sans KR', sans-serif;
+      --font-body:    'Noto Sans KR', 'Space Grotesk', sans-serif;
+      --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme="dark"]) {
+        --bg:       #F4F7FF;
+        --surface:  #FFFFFF;
+        --surface2: #EBF0FF;
+        --border:   #CBD5E8;
+        --text:     #0F172A;
+        --muted:    #64748B;
+        --accent:   #007A5E;
+        --accent-dk:#005C47;
+        --amber:    #D97706;
+        --amber-lt: #92400E;
+      }
+    }
+    :root[data-theme="light"] {
+      --bg:       #F4F7FF;
+      --surface:  #FFFFFF;
+      --surface2: #EBF0FF;
+      --border:   #CBD5E8;
+      --text:     #0F172A;
+      --muted:    #64748B;
+      --accent:   #007A5E;
+      --accent-dk:#005C47;
+      --amber:    #D97706;
+      --amber-lt: #92400E;
+    }
+    :root[data-theme="dark"] {
+      --bg:        #0B0F1A;
+      --surface:   #141B2D;
+      --surface2:  #1C2540;
+      --border:    #252F4A;
+      --text:      #E2E8F4;
+      --muted:     #64748B;
+      --accent:    #00C896;
+      --accent-dk: #009C77;
+      --amber:     #F59E0B;
+      --amber-lt:  #FCD34D;
+    }
+
+    /* ── RESET ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { max-width: 100%; display: block; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+
+    /* ── LAYOUT ─────────────────────────────────────────────── */
+    .container {
+      max-width: 1080px;
+      margin-inline: auto;
+      padding-inline: clamp(1.25rem, 5vw, 3rem);
+    }
+    section { padding-block: clamp(4rem, 8vw, 7rem); }
+
+    /* ── NAV ────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; inset-inline: 0;
+      z-index: 100;
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: background .3s;
+    }
+    .nav-inner {
+      max-width: 1080px;
+      margin-inline: auto;
+      padding-inline: clamp(1.25rem, 5vw, 3rem);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text);
+      letter-spacing: -.02em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: .85rem;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent); text-decoration: none; }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .45rem 1.1rem;
+      border-radius: var(--radius-sm);
+      background: var(--accent);
+      color: #000 !important;
+      font-weight: 700;
+      font-size: .82rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      transition: background .2s, transform .15s;
+    }
+    .nav-cta:hover { background: var(--accent-dk); transform: translateY(-1px); text-decoration: none; }
+    .theme-toggle {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--muted);
+      cursor: pointer;
+      width: 34px; height: 34px;
+      display: grid; place-items: center;
+      font-size: 1rem;
+      transition: border-color .2s, color .2s;
+    }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+    }
+
+    /* ── HERO ───────────────────────────────────────────────── */
+    #hero {
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(to right, var(--border) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: .3;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 100%);
+    }
+    .hero-glow {
+      position: absolute;
+      top: -10%; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 400px;
+      background: radial-gradient(ellipse, color-mix(in srgb, var(--accent) 15%, transparent), transparent 70%);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .35rem .9rem;
+      border-radius: 99px;
+      border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+      background: color-mix(in srgb, var(--accent) 8%, transparent);
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero-badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.3)} }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -.03em;
+      text-wrap: balance;
+      margin-bottom: 1.2rem;
+    }
+    .hero-title .hl { color: var(--accent); }
+    .hero-title .hl-amber { color: var(--amber); }
+    .hero-desc {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted);
+      max-width: 56ch;
+      margin-bottom: 2.2rem;
+      line-height: 1.75;
+    }
+    .hero-desc strong { color: var(--text); font-weight: 600; }
+    .hero-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      margin-bottom: 3rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .7rem 1.6rem;
+      border-radius: var(--radius-sm);
+      font-size: .9rem;
+      font-weight: 700;
+      letter-spacing: .03em;
+      cursor: pointer;
+      transition: all .2s;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+    }
+    .btn-primary:hover { background: var(--accent-dk); transform: translateY(-2px); text-decoration: none; color: #000; }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); text-decoration: none; }
+    .hero-terminal {
+      display: inline-block;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.6rem;
+      font-family: var(--font-mono);
+      font-size: .82rem;
+      color: var(--muted);
+      max-width: 440px;
+    }
+    .hero-terminal .prompt { color: var(--accent); }
+    .hero-terminal .cmd { color: var(--text); }
+    .hero-terminal .out { color: var(--muted); }
+    .hero-terminal .out.ok { color: var(--accent); }
+    .hero-terminal .out.amber { color: var(--amber); }
+    .hero-terminal .cursor {
+      display: inline-block;
+      width: 8px; height: 1em;
+      background: var(--accent);
+      margin-left: 2px;
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      margin-top: 2.5rem;
+    }
+    .stat { display: flex; flex-direction: column; gap: .1rem; }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -.04em;
+      font-variant-numeric: tabular-nums;
+    }
+    .stat-num span { color: var(--accent); }
+    .stat-label { font-size: .78rem; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
+
+    /* ── SECTION TITLES ─────────────────────────────────────── */
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      color: var(--accent);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: .6rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -.03em;
+      line-height: 1.2;
+      text-wrap: balance;
+      margin-bottom: 1rem;
+    }
+    .section-desc {
+      color: var(--muted);
+      max-width: 52ch;
+      margin-bottom: 3rem;
+      font-size: 1.05rem;
+    }
+
+    /* ── ABOUT ──────────────────────────────────────────────── */
+    #about { background: var(--surface); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    @media (max-width: 720px) { .about-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .about-story p {
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 1rem;
+    }
+    .about-story p strong { color: var(--text); }
+    .about-story p em { color: var(--accent); font-style: normal; font-weight: 600; }
+    .journey-steps { display: flex; flex-direction: column; gap: 1.2rem; }
+    .journey-step {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .step-icon {
+      flex-shrink: 0;
+      width: 38px; height: 38px;
+      border-radius: var(--radius-sm);
+      display: grid; place-items: center;
+      font-size: 1rem;
+    }
+    .step-icon.qa { background: color-mix(in srgb, var(--amber) 12%, transparent); color: var(--amber); }
+    .step-icon.code { background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); }
+    .step-icon.both { background: color-mix(in srgb, #818CF8 12%, transparent); color: #818CF8; }
+    .step-body h4 { font-weight: 600; font-size: .95rem; margin-bottom: .2rem; }
+    .step-body p { font-size: .85rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── PROJECTS ───────────────────────────────────────────── */
+    #projects { background: var(--bg); }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 5%, transparent), transparent 60%);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .project-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 16px 40px -8px color-mix(in srgb, var(--accent) 20%, transparent); }
+    .project-card:hover::before { opacity: 1; }
+    .project-card.amber-card:hover { border-color: var(--amber); box-shadow: 0 16px 40px -8px color-mix(in srgb, var(--amber) 20%, transparent); }
+    .project-card.amber-card::before { background: linear-gradient(135deg, color-mix(in srgb, var(--amber) 5%, transparent), transparent 60%); }
+    .project-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      position: relative; z-index: 1;
+    }
+    .tag {
+      padding: .22rem .65rem;
+      border-radius: 99px;
+      font-size: .72rem;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      letter-spacing: .03em;
+    }
+    .tag-green { background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent); }
+    .tag-amber { background: color-mix(in srgb, var(--amber) 14%, transparent); color: var(--amber); }
+    .tag-blue  { background: color-mix(in srgb, #60A5FA 14%, transparent); color: #60A5FA; }
+    .tag-purple{ background: color-mix(in srgb, #A78BFA 14%, transparent); color: #A78BFA; }
+    .project-icon {
+      font-size: 2rem;
+      position: relative; z-index: 1;
+    }
+    .project-name {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      position: relative; z-index: 1;
+    }
+    .project-desc {
+      font-size: .9rem;
+      color: var(--muted);
+      line-height: 1.75;
+      flex: 1;
+      position: relative; z-index: 1;
+    }
+    .project-stats {
+      display: flex;
+      gap: 1.2rem;
+      padding-top: .8rem;
+      border-top: 1px solid var(--border);
+      position: relative; z-index: 1;
+    }
+    .p-stat { display: flex; flex-direction: column; gap: .1rem; }
+    .p-stat-num { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; color: var(--text); }
+    .p-stat-label { font-size: .7rem; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
+    .project-links {
+      display: flex;
+      gap: .6rem;
+      position: relative; z-index: 1;
+    }
+    .link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .45rem 1rem;
+      border-radius: var(--radius-sm);
+      font-size: .8rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      color: var(--text);
+      transition: all .2s;
+    }
+    .link-btn:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+    .link-btn.amber:hover { border-color: var(--amber); color: var(--amber); }
+
+    /* ── SKILLS ─────────────────────────────────────────────── */
+    #skills { background: var(--surface); }
+    .skills-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+    @media (max-width: 720px) { .skills-two-col { grid-template-columns: 1fr; } }
+    .skill-group {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+    }
+    .skill-group-label {
+      font-family: var(--font-display);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .skill-group-label.qa-label { color: var(--amber); }
+    .skill-group-label.qa-label::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--amber); }
+    .skill-group-label.dev-label { color: var(--accent); }
+    .skill-group-label.dev-label::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+    .skill-items { display: flex; flex-direction: column; gap: .9rem; }
+    .skill-item { display: flex; flex-direction: column; gap: .35rem; }
+    .skill-item-top { display: flex; justify-content: space-between; align-items: center; }
+    .skill-item-name { font-size: .9rem; font-weight: 500; }
+    .skill-item-level { font-size: .75rem; color: var(--muted); font-family: var(--font-mono); }
+    .skill-bar { height: 5px; background: var(--border); border-radius: 99px; overflow: hidden; }
+    .skill-fill {
+      height: 100%;
+      border-radius: 99px;
+      animation: growBar 1s ease-out forwards;
+      transform-origin: left;
+    }
+    .skill-fill.qa-fill { background: var(--amber); }
+    .skill-fill.dev-fill { background: var(--accent); }
+    @keyframes growBar { from { width: 0 } }
+    .tag-cloud { display: flex; flex-wrap: wrap; gap: .5rem; }
+
+    /* ── CAREER ─────────────────────────────────────────────── */
+    #career { background: var(--bg); }
+    .career-timeline {
+      border-left: 2px solid var(--border);
+      padding-left: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+    .timeline-entry { position: relative; }
+    .timeline-dot {
+      position: absolute;
+      left: -2.625rem;
+      top: .3rem;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent);
+    }
+    .timeline-dot.amber { background: var(--amber); box-shadow: 0 0 0 3px color-mix(in srgb, var(--amber) 30%, transparent); }
+    .timeline-period {
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      color: var(--muted);
+      margin-bottom: .35rem;
+      letter-spacing: .03em;
+    }
+    .timeline-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: .15rem;
+    }
+    .timeline-company { font-size: .85rem; color: var(--accent); font-weight: 600; margin-bottom: .7rem; }
+    .timeline-desc {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+    .timeline-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .8rem; }
+
+    /* ── CONTACT ────────────────────────────────────────────── */
+    #contact { background: var(--surface); text-align: center; }
+    .contact-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: clamp(2rem, 5vw, 4rem);
+      max-width: 640px;
+      margin-inline: auto;
+    }
+    .contact-card .section-title { font-size: clamp(1.5rem, 3vw, 2rem); }
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: .8rem;
+      margin-top: 2rem;
+    }
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .65rem 1.4rem;
+      border-radius: var(--radius-sm);
+      font-size: .9rem;
+      font-weight: 600;
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      transition: all .2s;
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); text-decoration: none; }
+    .contact-link.primary { background: var(--accent); border-color: var(--accent); color: #000; }
+    .contact-link.primary:hover { background: var(--accent-dk); border-color: var(--accent-dk); color: #000; }
+    .contact-email-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+      margin-top: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: .9rem;
+      color: var(--muted);
+    }
+    .copy-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--muted);
+      cursor: pointer;
+      padding: .25rem .6rem;
+      font-size: .72rem;
+      font-family: var(--font-mono);
+      transition: all .2s;
+    }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .copy-btn.copied { border-color: var(--accent); color: var(--accent); }
+
+    /* ── FOOTER ─────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: .8rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--accent); }
+
+    /* ── DIVIDER ────────────────────────────────────────────── */
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin-inline: auto;
+      max-width: 1080px;
+    }
+
+    /* ── SCROLL REVEAL ──────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">이솔지<span>.</span></span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#career">Career</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:.6rem;">
+      <button class="theme-toggle" id="themeToggle" aria-label="테마 전환">🌙</button>
+      <a href="https://leesolgi.github.io/qa-portfolio-solji/" target="_blank" rel="noopener" class="nav-cta">QA 포트폴리오 →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">개발자 전환 포트폴리오</div>
+      <h1 class="hero-title">
+        QA 4년 6개월이<br />
+        <span class="hl">개발을 만났을 때</span>
+      </h1>
+      <p class="hero-desc">
+        <strong>버그를 찾던 눈</strong>이 이제 코드를 씁니다.<br />
+        Selenium 자동화부터 바이브코딩 프로젝트까지,<br />
+        테스트가 통과하는 코드를 만드는 엔지니어 이솔지입니다.
+      </p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn btn-primary">프로젝트 보기 ↓</a>
+        <a href="https://github.com/leesolgi" target="_blank" rel="noopener" class="btn btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://leesolgi.github.io/qa-portfolio-solji/resume.pdf" target="_blank" rel="noopener" class="btn btn-outline">이력서 PDF ↓</a>
+      </div>
+
+      <div class="hero-terminal" aria-label="터미널 출력 예시">
+        <div>
+          <span class="prompt">~/dev</span>
+          &nbsp;<span class="cmd">pytest ott_automation/ -v</span>
+        </div>
+        <div style="margin-top:.5rem;color:var(--muted);">
+          <span class="out ok">PASSED</span> test_login.py::test_valid_login<br/>
+          <span class="out ok">PASSED</span> test_payment.py::test_duplicate_block<br/>
+          <span class="out ok">PASSED</span> test_search.py::test_content_search<br/>
+          <span class="out ok">PASSED</span> test_playback.py::test_resume_play<br/>
+          <div style="margin-top:.4rem;">
+            <span class="out amber">18 passed</span>
+            <span class="out">&nbsp;in 4.32s</span>
+            <span class="cursor"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">4<span>년</span> 6<span>개월</span></div>
+          <div class="stat-label">QA 경력</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">18<span>개</span></div>
+          <div class="stat-label">자동화 TC</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">13<span>종</span></div>
+          <div class="stat-label">검증 디바이스</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">100<span>%</span></div>
+          <div class="stat-label">결함 재현율</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-story reveal">
+        <div class="section-eyebrow">// about me</div>
+        <h2 class="section-title">QA의 시선으로<br/>코드를 씁니다</h2>
+        <p>
+          <strong>엔씨엘(NCL)에서 4년 6개월</strong> 동안 IPTV·OTT·멀티 디바이스 QA를 수행하며,
+          결함이 어디서 생기는지 누구보다 잘 알게 됐습니다.
+        </p>
+        <p>
+          그 경험이 코드를 쓸 때도 그대로 이어집니다.
+          <em>테스트 케이스를 먼저 떠올리고, 엣지케이스를 미리 막고,
+          로그를 보고 근본 원인을 추적하는 방식</em>으로 개발합니다.
+        </p>
+        <p>
+          바이브코딩으로 전자 계산기를 만들고, Selenium+POM으로 OTT 자동화를 구축하면서
+          <strong>"직접 만드는 것"</strong>의 재미를 알았습니다.
+          이제 그 재미를 팀에 가져가고 싶습니다.
+        </p>
+      </div>
+      <div class="reveal" style="transition-delay:.15s">
+        <div class="journey-steps">
+          <div class="journey-step">
+            <div class="step-icon qa">🔍</div>
+            <div class="step-body">
+              <h4>QA 엔지니어 (2021 ~ 2025)</h4>
+              <p>IPTV·OTT 셋톱박스 13종 검증, 경계값·조합 테스트 설계, JIRA 결함 트리아지 운영</p>
+            </div>
+          </div>
+          <div class="journey-step">
+            <div class="step-icon code">⚡</div>
+            <div class="step-body">
+              <h4>자동화 & 바이브코딩 (2025)</h4>
+              <p>Selenium+POM으로 TC 18개 자동화, GitHub Actions CI 구축, 전자 계산기 바이브코딩</p>
+            </div>
+          </div>
+          <div class="journey-step">
+            <div class="step-icon both">🚀</div>
+            <div class="step-body">
+              <h4>지금 — 개발자 전환 중</h4>
+              <p>Python·JavaScript 개발 역량을 쌓으며, QA 감각을 갖춘 개발자로 성장 중</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-eyebrow">// projects</div>
+    <h2 class="section-title">직접 만든 것들</h2>
+    <p class="section-desc">QA 감각과 개발 도구를 결합해 실제로 동작하는 프로젝트를 만들었습니다.</p>
+
+    <div class="projects-grid">
+      <!-- MockOTT -->
+      <div class="project-card reveal">
+        <div class="project-tag-row">
+          <span class="tag tag-green">Python</span>
+          <span class="tag tag-green">Selenium</span>
+          <span class="tag tag-blue">pytest</span>
+          <span class="tag tag-purple">GitHub Actions</span>
+        </div>
+        <div class="project-icon">🤖</div>
+        <div class="project-name">MockOTT 자동화 테스트</div>
+        <p class="project-desc">
+          OTT 서비스의 핵심 기능(로그인, 검색, 결제, 재생, 찜)을 자동화한 E2E 테스트 프로젝트.
+          POM 패턴으로 유지보수성을 높이고, GitHub Actions CI 파이프라인으로 자동 실행합니다.
+          잔액부족 차단, 중복구매 방지 등 예외 시나리오 11건도 커버.
+        </p>
+        <div class="project-stats">
+          <div class="p-stat"><div class="p-stat-num">18</div><div class="p-stat-label">TC 전체 통과</div></div>
+          <div class="p-stat"><div class="p-stat-num">11</div><div class="p-stat-label">트러블슈팅</div></div>
+          <div class="p-stat"><div class="p-stat-num">5</div><div class="p-stat-label">예외 시나리오</div></div>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/leesolgi/ott_automation" target="_blank" rel="noopener" class="link-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+
+      <!-- 전자 계산기 -->
+      <div class="project-card amber-card reveal" style="transition-delay:.1s">
+        <div class="project-tag-row">
+          <span class="tag tag-amber">JavaScript</span>
+          <span class="tag tag-amber">HTML/CSS</span>
+          <span class="tag tag-blue">바이브코딩</span>
+        </div>
+        <div class="project-icon">🧮</div>
+        <div class="project-name">전자 계산기</div>
+        <p class="project-desc">
+          바이브코딩으로 처음 만든 JavaScript 프로젝트. 사칙연산, 연속 계산, 퍼센트 연산, 소수점 처리 등
+          계산기의 엣지케이스를 QA 감각으로 꼼꼼히 검증하며 구현했습니다.
+          클린 UI와 키보드 입력 지원.
+        </p>
+        <div class="project-stats">
+          <div class="p-stat"><div class="p-stat-num" style="color:var(--amber)">Vanilla</div><div class="p-stat-label">JS 프레임워크 없음</div></div>
+          <div class="p-stat"><div class="p-stat-num" style="color:var(--amber)">QA</div><div class="p-stat-label">감각으로 엣지케이스</div></div>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/leesolgi/calculator" target="_blank" rel="noopener" class="link-btn amber">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+
+      <!-- QA 포트폴리오 사이트 -->
+      <div class="project-card reveal" style="transition-delay:.2s">
+        <div class="project-tag-row">
+          <span class="tag tag-blue">HTML/CSS/JS</span>
+          <span class="tag tag-purple">GitHub Pages</span>
+          <span class="tag tag-green">포트폴리오</span>
+        </div>
+        <div class="project-icon">🌐</div>
+        <div class="project-name">QA 포트폴리오 사이트</div>
+        <p class="project-desc">
+          IPTV·OTT QA 4년 6개월 경력을 담은 포트폴리오 사이트. 다크/라이트 테마 전환, 스크롤 애니메이션,
+          클립보드 복사 기능 등을 바닐라 JS로 구현. GitHub Pages에 직접 배포.
+        </p>
+        <div class="project-links">
+          <a href="https://leesolgi.github.io/qa-portfolio-solji/" target="_blank" rel="noopener" class="link-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            사이트 보기
+          </a>
+          <a href="https://github.com/leesolgi/qa-portfolio-solji" target="_blank" rel="noopener" class="link-btn">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-eyebrow">// skills</div>
+    <h2 class="section-title">두 가지를 모두 압니다</h2>
+    <p class="section-desc">QA 역량과 개발 스킬, 둘 다 가진 엔지니어입니다.</p>
+
+    <div class="skills-two-col reveal">
+      <div class="skill-group">
+        <div class="skill-group-label qa-label">QA 역량</div>
+        <div class="skill-items">
+          <div class="skill-item">
+            <div class="skill-item-top">
+              <span class="skill-item-name">테스트 설계 (경계값·조합·상태전이)</span>
+              <span class="skill-item-level">Expert</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill qa-fill" style="width:95%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-top">
+              <span class="skill-item-name">결함 트리아지 · JIRA · Confluence</span>
+              <span class="skill-item-level">Expert</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill qa-fill" style="width:90%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-top">
+              <span class="skill-item-name">ADB · Logcat 로그 분석</span>
+              <span class="skill-item-level">Advanced</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill qa-fill" style="width:80%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-top">
+              <span class="skill-item-name">크로스 디바이스 동시성 테스트</span>
+              <span class="skill-item-level">Advanced</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill qa-fill" style="width:85%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-label dev-label">개발 역량</div>
+        <div class="skill-items">
+          <div class="skill-item">
+            <div class="skill-item-top">
+              <span class="skill-item-name">Python · Selenium · pytest</span>
+              <span class="skill-item-level">Intermediate+</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill dev-fill" style="width:72%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-top">
+              <span class="skill-item-name">HTML · CSS · JavaScript</span>
+              <span class="skill-item-level">Intermediate</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill dev-fill" style="width:60%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-top">
+              <span class="skill-item-name">GitHub Actions CI/CD</span>
+              <span class="skill-item-level">Intermediate</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill dev-fill" style="width:65%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-top">
+              <span class="skill-item-name">Git · Linux · Android</span>
+              <span class="skill-item-level">Intermediate</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill dev-fill" style="width:68%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tag-cloud reveal" style="margin-top:2rem;transition-delay:.15s">
+      <span class="tag tag-green">Selenium</span>
+      <span class="tag tag-green">Python</span>
+      <span class="tag tag-green">pytest</span>
+      <span class="tag tag-blue">POM 패턴</span>
+      <span class="tag tag-blue">GitHub Actions</span>
+      <span class="tag tag-blue">ESLint</span>
+      <span class="tag tag-amber">JIRA</span>
+      <span class="tag tag-amber">Confluence</span>
+      <span class="tag tag-amber">ADB</span>
+      <span class="tag tag-amber">Logcat</span>
+      <span class="tag tag-purple">경계값 분석</span>
+      <span class="tag tag-purple">조합 테스트</span>
+      <span class="tag tag-purple">상태 전이 테스트</span>
+      <span class="tag tag-purple">탐색적 테스팅</span>
+    </div>
+  </div>
+</section>
+
+<!-- CAREER -->
+<section id="career">
+  <div class="container">
+    <div class="section-eyebrow">// career</div>
+    <h2 class="section-title">경력</h2>
+    <p class="section-desc" style="margin-bottom:3.5rem;">4년 6개월간 실전에서 쌓은 QA 엔지니어링 경험입니다.</p>
+
+    <div class="career-timeline reveal">
+      <div class="timeline-entry">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">2025.07 — 2025.09</div>
+        <div class="timeline-title">AI 음성인식(에이닷) 호환성 테스트</div>
+        <div class="timeline-company">엔씨엘 (NCL) · SQA 대리</div>
+        <p class="timeline-desc">신형·레거시 단말 간 프로필 세션 격리 및 음성 발화 매칭 검증. 단말 간 응답 편차 0.5초 이내 최적화 달성, 결함 재현율 100% 유지.</p>
+        <div class="timeline-tags">
+          <span class="tag tag-green">상태 전이 테스트</span>
+          <span class="tag tag-amber">ADB · Logcat</span>
+          <span class="tag tag-blue">성능 격차 분석</span>
+        </div>
+      </div>
+
+      <div class="timeline-entry">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">2024.10 — 2025.02</div>
+        <div class="timeline-title">모바일 앱 인증·페어링 검증 (Btv, 마음친구)</div>
+        <div class="timeline-company">엔씨엘 (NCL) · SQA 대리</div>
+        <p class="timeline-desc">Wi-Fi·인증번호·QR코드 3방식 정상/비정상 시나리오 검증. 최대 4대 동시 연결 시 UI 렌더링 Major 결함 발견 및 재현 절차 문서화.</p>
+        <div class="timeline-tags">
+          <span class="tag tag-green">크로스 디바이스 동시성</span>
+          <span class="tag tag-amber">ADB · Android</span>
+        </div>
+      </div>
+
+      <div class="timeline-entry">
+        <div class="timeline-dot amber"></div>
+        <div class="timeline-period">2021.07 — 2025.12</div>
+        <div class="timeline-title">IPTV 서비스 E2E 검증</div>
+        <div class="timeline-company">엔씨엘 (NCL) · SQA 대리</div>
+        <p class="timeline-desc">셋톱박스 13종 · 핵심 화면 10개 신규 기능·회귀 테스트 설계·수행. 결제-재생 연동 Critical 결함 배포 전 조기 발견. 기획팀 사전 리뷰로 요구사항 모호 구간 5건 출시 전 해소. Critical·Major 결함 30건+/주 트리아지.</p>
+        <div class="timeline-tags">
+          <span class="tag tag-purple">경계값 분석</span>
+          <span class="tag tag-purple">조합 테스트</span>
+          <span class="tag tag-amber">JIRA · Confluence</span>
+          <span class="tag tag-blue">회귀 테스트</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-card reveal">
+      <div class="section-eyebrow" style="margin-bottom:.5rem;">// contact</div>
+      <h2 class="section-title">함께 일해요</h2>
+      <p style="color:var(--muted);font-size:.95rem;margin-top:.5rem;line-height:1.8;">
+        QA 감각을 가진 개발자를 찾고 계신다면,<br/>
+        서울·경기 전지역 근무 가능합니다. 편하게 연락해 주세요.
+      </p>
+
+      <div class="contact-links">
+        <a href="mailto:sughjd9@gmail.com" class="contact-link primary">
+          ✉ 이메일 보내기
+        </a>
+        <a href="https://github.com/leesolgi" target="_blank" rel="noopener" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://leesolgi.github.io/qa-portfolio-solji/" target="_blank" rel="noopener" class="contact-link">
+          🌐 QA 포트폴리오
+        </a>
+        <a href="https://leesolgi.github.io/qa-portfolio-solji/resume.pdf" target="_blank" rel="noopener" class="contact-link">
+          📄 이력서 PDF
+        </a>
+      </div>
+
+      <div class="contact-email-box">
+        <span id="emailText">sughjd9@gmail.com</span>
+        <button class="copy-btn" id="copyBtn" onclick="copyEmail()">복사</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 이솔지 · QA Engineer → Developer &nbsp;·&nbsp;
+    <a href="https://leesolgi.github.io/qa-portfolio-solji/" target="_blank" rel="noopener">QA 포트폴리오</a>
+    &nbsp;·&nbsp;
+    <a href="https://github.com/leesolgi" target="_blank" rel="noopener">GitHub</a>
+  </p>
+</footer>
+
+<script>
+  // ── THEME TOGGLE ─────────────────────────────────────────
+  const root = document.documentElement;
+  const btn = document.getElementById('themeToggle');
+  let dark = true;
+  try { dark = localStorage.getItem('theme') !== 'light'; } catch(e) {}
+  applyTheme(dark);
+
+  btn.addEventListener('click', () => {
+    dark = !dark;
+    applyTheme(dark);
+    try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch(e) {}
+  });
+
+  function applyTheme(isDark) {
+    root.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    btn.textContent = isDark ? '☀️' : '🌙';
+  }
+
+  // ── SCROLL REVEAL ────────────────────────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── COPY EMAIL ───────────────────────────────────────────
+  function copyEmail() {
+    const email = 'sughjd9@gmail.com';
+    const copyBtn = document.getElementById('copyBtn');
+    try {
+      navigator.clipboard.writeText(email).then(() => {
+        copyBtn.textContent = '복사됨 ✓';
+        copyBtn.classList.add('copied');
+        setTimeout(() => { copyBtn.textContent = '복사'; copyBtn.classList.remove('copied'); }, 2000);
+      });
+    } catch(e) {
+      const ta = document.createElement('textarea');
+      ta.value = email;
+      ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      copyBtn.textContent = '복사됨 ✓';
+      copyBtn.classList.add('copied');
+      setTimeout(() => { copyBtn.textContent = '복사'; copyBtn.classList.remove('copied'); }, 2000);
+    }
+  }
+
+  // ── NAV ACTIVE ON SCROLL ─────────────────────────────────
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => a.style.color = '');
+        const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+        if (active) active.style.color = 'var(--accent)';
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(s => sectionObserver.observe(s));
+</script>
+</body>
+</html>
