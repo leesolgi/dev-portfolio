@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>랜딩페이지 와이어프레임</title>
+
+<style>
+  :root {
+    --bg:      #0B0F1A;
+    --surface: #141B2D;
+    --border:  #252F4A;
+    --text:    #E2E8F4;
+    --muted:   #8B95AB;
+    --accent:  #00C896;
+    --radius:  12px;
+    --radius-sm: 6px;
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg:      #F4F7FF;
+      --surface: #FFFFFF;
+      --border:  #D8DFEF;
+      --text:    #0F172A;
+      --muted:   #5B6578;
+      --accent:  #007A5E;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg:      #F4F7FF;
+    --surface: #FFFFFF;
+    --border:  #D8DFEF;
+    --text:    #0F172A;
+    --muted:   #5B6578;
+    --accent:  #007A5E;
+  }
+  :root[data-theme="dark"] {
+    --bg:      #0B0F1A;
+    --surface: #141B2D;
+    --border:  #252F4A;
+    --text:    #E2E8F4;
+    --muted:   #8B95AB;
+    --accent:  #00C896;
+  }
+
+  * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: var(--accent); }
+  .container { max-width: 1040px; margin-inline: auto; padding-inline: clamp(1.25rem, 5vw, 2.5rem); }
+
+  /* 포커스 표시는 접근성을 위해 항상 보이게 유지 */
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .skip-link {
+    position: absolute; left: -9999px; top: 0;
+    background: var(--accent); color: #000; padding: .6rem 1rem;
+    border-radius: 0 0 var(--radius-sm) 0; z-index: 1000; font-weight: 700;
+  }
+  .skip-link:focus { left: 0; }
+
+  /* HEADER */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1040px; margin-inline: auto; padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+    height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  }
+  .logo { font-weight: 800; font-size: 1.1rem; }
+  .logo span { color: var(--accent); }
+  nav ul { list-style: none; display: flex; gap: 1.5rem; }
+  nav a { color: var(--muted); font-size: .9rem; font-weight: 600; text-decoration: none; }
+  nav a:hover, nav a:focus-visible { color: var(--accent); }
+  .theme-btn {
+    border: 1px solid var(--border); background: transparent; color: var(--muted);
+    width: 36px; height: 36px; border-radius: var(--radius-sm); cursor: pointer; font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .nav-toggle {
+    display: none; border: 1px solid var(--border); background: transparent; color: var(--text);
+    width: 44px; height: 44px; border-radius: var(--radius-sm); cursor: pointer; font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  /* 640px 이하: 터치 타겟을 44px로 키우고, nav 링크는 햄버거 메뉴 뒤로 숨긴다 */
+  @media (max-width: 640px) {
+    .nav-toggle { display: block; }
+    .theme-btn { width: 44px; height: 44px; }
+    nav ul {
+      display: none;
+      position: absolute; top: 64px; left: 0; right: 0;
+      flex-direction: column; gap: 0; padding: .5rem 0;
+      background: var(--surface); border-bottom: 1px solid var(--border);
+    }
+    nav ul.open { display: flex; }
+    nav a { display: block; padding: .9rem clamp(1.25rem, 5vw, 2.5rem); font-size: 1rem; }
+  }
+
+  /* HERO */
+  #hero {
+    padding-block: clamp(4rem, 10vw, 7rem);
+    text-align: center;
+  }
+  .eyebrow {
+    display: inline-block; font-size: .8rem; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--accent);
+    border: 1px solid var(--border); border-radius: 999px; padding: .3rem .9rem;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title {
+    font-size: clamp(2rem, 6vw, 3.4rem); font-weight: 800; letter-spacing: -.02em;
+    margin-bottom: 1rem;
+  }
+  .hero-title .hl { color: var(--accent); }
+  .hero-sub {
+    color: var(--muted); font-size: clamp(1rem, 2vw, 1.15rem);
+    max-width: 52ch; margin-inline: auto; margin-bottom: 2rem;
+  }
+  .hero-actions { display: flex; justify-content: center; gap: .8rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: .5rem;
+    padding: .75rem 1.5rem; border-radius: var(--radius-sm);
+    font-weight: 700; font-size: .95rem; text-decoration: none; cursor: pointer; border: none;
+  }
+  .btn-primary { background: var(--accent); color: #000; }
+  .btn-outline { background: transparent; color: var(--text); border: 1.5px solid var(--border); }
+  .btn:hover { opacity: .85; }
+
+  /* SECTION HEADING */
+  .section-heading { text-align: center; margin-bottom: 2.5rem; }
+  .section-heading h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 800; margin-bottom: .5rem; }
+  .section-heading p { color: var(--muted); }
+
+  /* PROJECTS */
+  #projects { padding-block: clamp(3rem, 8vw, 6rem); background: var(--surface); }
+  .project-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;
+    list-style: none;
+  }
+  .project-card {
+    background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+    overflow: hidden; display: flex; flex-direction: column;
+  }
+  .project-card img { aspect-ratio: 16 / 9; object-fit: cover; background: var(--border); }
+  .project-body { padding: 1.4rem; display: flex; flex-direction: column; gap: .7rem; flex: 1; }
+  .project-body h3 { font-size: 1.1rem; font-weight: 700; }
+  .project-body p { color: var(--muted); font-size: .9rem; flex: 1; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .project-tags li {
+    list-style: none; font-size: .72rem; font-weight: 600; padding: .2rem .6rem;
+    border-radius: 999px; background: color-mix(in srgb, var(--accent) 15%, transparent); color: var(--accent);
+  }
+  .project-link { font-size: .85rem; font-weight: 700; text-decoration: none; }
+
+  /* CONTACT */
+  #contact { padding-block: clamp(3rem, 8vw, 6rem); }
+  .contact-card {
+    max-width: 560px; margin-inline: auto; background: var(--surface);
+    border: 1px solid var(--border); border-radius: var(--radius); padding: clamp(1.5rem, 5vw, 2.5rem);
+  }
+  .form-row { display: flex; flex-direction: column; gap: .4rem; margin-bottom: 1.2rem; }
+  label { font-size: .85rem; font-weight: 700; }
+  input, textarea {
+    background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm);
+    color: var(--text); padding: .7rem .9rem; font: inherit;
+  }
+  textarea { resize: vertical; min-height: 110px; }
+  .form-note { font-size: .8rem; color: var(--muted); margin-top: .8rem; }
+
+  footer {
+    border-top: 1px solid var(--border); padding: 2rem; text-align: center;
+    color: var(--muted); font-size: .85rem;
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">본문으로 건너뛰기</a>
+
+<header>
+  <div class="nav-inner">
+    <span class="logo">이름<span>.</span></span>
+    <nav aria-label="주요 메뉴">
+      <ul id="navList">
+        <li><a href="#hero">홈</a></li>
+        <li><a href="#projects">프로젝트</a></li>
+        <li><a href="#contact">연락처</a></li>
+      </ul>
+    </nav>
+    <div style="display:flex; align-items:center; gap:.5rem;">
+      <button type="button" class="theme-btn" id="themeToggle" aria-label="다크/라이트 테마 전환" aria-pressed="false">🌙</button>
+      <button type="button" class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="navList">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section id="hero" aria-labelledby="hero-title">
+    <div class="container">
+      <span class="eyebrow">QA Engineer · Vibe Coding</span>
+      <h1 class="hero-title" id="hero-title">이솔지 <span class="hl">QA 엔지니어, 자동화로 역량을 넓히다</span></h1>
+      <p class="hero-sub">
+        수년간 IPTV·OTT 서비스의 결함을 찾아온 시선으로 이제 코드를 씁니다.
+        바이브코딩으로 직접 웹 앱을 만들고 Selenium으로 테스트를 자동화하며,
+        QA에서 개발·자동화까지 실전 역량을 하나씩 쌓아가고 있습니다.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">프로젝트 보기</a>
+        <a href="#contact" class="btn btn-outline">연락하기</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" aria-labelledby="projects-title">
+    <div class="container">
+      <div class="section-heading">
+        <h2 id="projects-title">프로젝트</h2>
+        <p>QA와 개발을 오가며 직접 만든 프로젝트들입니다.</p>
+      </div>
+
+      <ul class="project-grid">
+        <li class="project-card">
+          <img src="https://placehold.co/480x270?text=구직급여+계산기" alt="구직급여 계산기 웹 앱 화면" />
+          <div class="project-body">
+            <h3>구직급여(실업급여) 계산기</h3>
+            <p>평균임금과 가입기간을 입력하면 예상 구직급여를 계산해주는 Streamlit 웹 앱. 0원·음수 등 경계값 입력까지 직접 검증하고 테스트했습니다.</p>
+            <ul class="project-tags" aria-label="구직급여 계산기 기술 태그">
+              <li>Python</li>
+              <li>Streamlit</li>
+              <li>pytest</li>
+            </ul>
+            <a href="https://leesolgi-calculator-app-ek7rdt.streamlit.app/" target="_blank" rel="noopener" class="project-link" aria-label="구직급여 계산기 앱 열기 (새 창)">앱 보기 →</a>
+          </div>
+        </li>
+
+        <li class="project-card">
+          <img src="https://placehold.co/480x270?text=MockOTT+자동화" alt="MockOTT 자동화 테스트 실행 화면" />
+          <div class="project-body">
+            <h3>MockOTT 자동화 테스트</h3>
+            <p>로그인·검색·결제·재생 등 OTT 핵심 흐름을 Selenium과 POM 패턴으로 자동화한 E2E 테스트 프로젝트. GitHub Actions로 매 커밋마다 자동 실행됩니다.</p>
+            <ul class="project-tags" aria-label="MockOTT 자동화 기술 태그">
+              <li>Python</li>
+              <li>Selenium</li>
+              <li>GitHub Actions</li>
+            </ul>
+            <a href="https://github.com/leesolgi/ott_automation" target="_blank" rel="noopener" class="project-link" aria-label="MockOTT 자동화 GitHub 저장소 열기 (새 창)">GitHub →</a>
+          </div>
+        </li>
+
+        <li class="project-card">
+          <img src="https://placehold.co/480x270?text=QA+포트폴리오" alt="QA 포트폴리오 사이트 화면" />
+          <div class="project-body">
+            <h3>QA 포트폴리오 사이트</h3>
+            <p>4년 넘게 쌓아온 IPTV·OTT QA 경력을 정리한 개인 사이트. 다크/라이트 테마와 반응형 레이아웃을 바닐라 JS로 직접 구현해 GitHub Pages로 배포했습니다.</p>
+            <ul class="project-tags" aria-label="QA 포트폴리오 사이트 기술 태그">
+              <li>HTML/CSS/JS</li>
+              <li>GitHub Pages</li>
+            </ul>
+            <a href="https://leesolgi.github.io/qa-portfolio-solji/" target="_blank" rel="noopener" class="project-link" aria-label="QA 포트폴리오 사이트 열기 (새 창)">사이트 보기 →</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" aria-labelledby="contact-title">
+    <div class="container">
+      <div class="section-heading">
+        <h2 id="contact-title">연락처</h2>
+        <p>아래 폼으로 메시지를 남겨주세요 (placeholder, 실제 전송 기능 없음).</p>
+      </div>
+
+      <div class="contact-card">
+        <form id="contactForm" novalidate>
+          <div class="form-row">
+            <label for="name">이름</label>
+            <input type="text" id="name" name="name" autocomplete="name" required aria-required="true" />
+          </div>
+          <div class="form-row">
+            <label for="email">이메일</label>
+            <input type="email" id="email" name="email" autocomplete="email" required aria-required="true" />
+          </div>
+          <div class="form-row">
+            <label for="message">메시지</label>
+            <textarea id="message" name="message" required aria-required="true"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">보내기</button>
+          <p class="form-note" role="status" id="formStatus"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 이름. Placeholder footer — 실제 저작권 정보로 교체 예정.</p>
+</footer>
+
+<script>
+  // 모바일 내비게이션 토글 (640px 이하에서 햄버거 메뉴)
+  (function () {
+    var toggle = document.getElementById('navToggle');
+    var list = document.getElementById('navList');
+
+    function closeMenu() {
+      list.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', '메뉴 열기');
+      toggle.textContent = '☰';
+    }
+    function openMenu() {
+      list.classList.add('open');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', '메뉴 닫기');
+      toggle.textContent = '✕';
+    }
+
+    toggle.addEventListener('click', function () {
+      var isOpen = list.classList.contains('open');
+      isOpen ? closeMenu() : openMenu();
+    });
+
+    // 링크 클릭 시 메뉴 닫기
+    list.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', closeMenu);
+    });
+
+    // 640px 초과로 리사이즈되면(태블릿/데스크톱) 열림 상태 초기화
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 640) closeMenu();
+    });
+  })();
+
+  // 테마 토글
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('themeToggle');
+    var dark = true;
+    try { dark = localStorage.getItem('wf-theme') !== 'light'; } catch (e) {}
+    apply(dark);
+
+    btn.addEventListener('click', function () {
+      dark = !dark;
+      apply(dark);
+      try { localStorage.setItem('wf-theme', dark ? 'dark' : 'light'); } catch (e) {}
+    });
+
+    function apply(isDark) {
+      root.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      btn.textContent = isDark ? '☀️' : '🌙';
+      btn.setAttribute('aria-pressed', String(!isDark));
+    }
+  })();
+
+  // 연락처 폼: placeholder 제출 처리 (실제 전송 없음)
+  document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var status = document.getElementById('formStatus');
+    status.textContent = '전송 기능은 아직 연결되지 않았습니다 (placeholder).';
+  });
+</script>
+
+</body>
+</html>
