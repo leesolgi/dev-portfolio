@@ -3,7 +3,7 @@
 > QA 4년 6개월 경력을 가진 이솔지가 **개발자로 전환 중**임을 보여주는 포트폴리오 랜딩페이지입니다.
 > "버그를 찾던 눈이 이제 코드를 씁니다"를 한 문장으로, QA 감각과 개발 역량을 한 페이지에 함께 보여줍니다.
 
-🔗 **랜딩페이지** → [Claude 아티팩트로 게시됨](https://claude.ai/code/artifact/81dc6f2e-0d6d-4492-be9e-07f9dfa54b94) *(아직 별도 GitHub 저장소/도메인은 없습니다)*
+🔗 **랜딩페이지 (배포됨)** → [dev-portfolio-sol-cd30.vercel.app](https://dev-portfolio-sol-cd30.vercel.app)
 🌐 **기존 QA 포트폴리오** → [leesolgi.github.io/qa-portfolio-solji](https://leesolgi.github.io/qa-portfolio-solji/)
 🐙 **GitHub** → [github.com/leesolgi](https://github.com/leesolgi)
 
@@ -16,7 +16,7 @@
 | 목적 | QA 경력 4년 6개월 + 바이브코딩/자동화 프로젝트를 묶어, "개발자로 전환 중"이라는 메시지를 보여주는 랜딩페이지 |
 | 대상 | 개발 직무 지원 시 QA 경력을 강점으로 함께 어필하고 싶을 때 |
 | 형태 | 단일 HTML 페이지 (Hero → About → Projects → Skills → Career → Contact) |
-| 배포 상태 | Claude 아티팩트로 게시 (비공개 → 공유 시 링크로 열람 가능), GitHub Pages 배포는 아직 안 함 |
+| 배포 상태 | Vercel 배포 완료 ([dev-portfolio-sol-cd30.vercel.app](https://dev-portfolio-sol-cd30.vercel.app)), GitHub 저장소와 연동되어 main 브랜치 푸시 시 자동 재배포 |
 | 테마 | 다크/라이트 토글 지원 (기본값 다크) |
 
 ---
