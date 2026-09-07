@@ -130,9 +130,28 @@
     background: transparent; border: 1px solid var(--border); border-radius: var(--radius-sm);
     color: var(--muted); cursor: pointer; width: 34px; height: 34px;
     display: grid; place-items: center; font-size: 1rem; transition: border-color .2s, color .2s;
+    flex-shrink: 0;
   }
   .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
-  @media (max-width: 680px) { .nav-links { display: none; } }
+  .nav-toggle {
+    display: none; background: transparent; border: 1px solid var(--border); border-radius: var(--radius-sm);
+    color: var(--text); cursor: pointer; width: 34px; height: 34px;
+    font-size: 1.2rem; flex-shrink: 0;
+  }
+
+  /* 680px 이하: 터치 타겟을 44px로 키우고, nav 링크는 햄버거 메뉴 뒤로 숨긴다 */
+  @media (max-width: 680px) {
+    .nav-toggle { display: block; width: 44px; height: 44px; }
+    .theme-toggle { width: 44px; height: 44px; }
+    .nav-links {
+      display: none;
+      position: absolute; top: 60px; left: 0; right: 0;
+      flex-direction: column; align-items: stretch; gap: 0; padding: var(--space-2) 0;
+      background: var(--bg); border-bottom: 1px solid var(--border);
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a { display: block; padding: var(--space-4) clamp(1.25rem, 5vw, 3rem); font-size: var(--fs-md); }
+  }
 
   /* HERO */
   #hero {
@@ -303,16 +322,17 @@
 <nav>
   <div class="nav-inner">
     <span class="nav-logo">이솔지<span>.</span></span>
-    <ul class="nav-links">
+    <ul class="nav-links" id="navList">
       <li><a href="#about">About</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#career">Career</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <div style="display:flex;align-items:center;gap:.6rem;">
+    <div style="display:flex;align-items:center;gap:var(--space-2);">
       <button class="theme-toggle" id="themeToggle" aria-label="테마 전환">☀️</button>
       <a href="https://leesolgi.github.io/qa-portfolio-solji/" target="_blank" rel="noopener" class="nav-cta">QA 포트폴리오 →</a>
+      <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="navList">☰</button>
     </div>
   </div>
 </nav>
@@ -340,12 +360,12 @@
       </div>
       <div class="hero-terminal" aria-label="터미널 출력">
         <div><span class="prompt">~/dev</span>&nbsp;<span class="cmd">pytest ott_automation/ -v</span></div>
-        <div style="margin-top:.5rem;">
+        <div style="margin-top:var(--space-2);">
           <span class="out-ok">PASSED</span> test_login.py::test_valid_login<br/>
           <span class="out-ok">PASSED</span> test_payment.py::test_duplicate_block<br/>
           <span class="out-ok">PASSED</span> test_search.py::test_content_search<br/>
           <span class="out-ok">PASSED</span> test_playback.py::test_resume_play<br/>
-          <div style="margin-top:.4rem;"><span class="out-amber">18 passed</span> <span style="color:var(--muted)">in 4.32s</span><span class="cursor"></span></div>
+          <div style="margin-top:var(--space-2);"><span class="out-amber">18 passed</span> <span style="color:var(--muted)">in 4.32s</span><span class="cursor"></span></div>
         </div>
       </div>
       <div class="hero-stats">
@@ -480,7 +500,7 @@
         </div>
       </div>
     </div>
-    <div class="tag-cloud reveal" style="margin-top:2rem;transition-delay:.15s">
+    <div class="tag-cloud reveal" style="margin-top:var(--space-6);transition-delay:.15s">
       <span class="tag tag-green">Selenium</span><span class="tag tag-green">Python</span><span class="tag tag-green">pytest</span>
       <span class="tag tag-blue">POM 패턴</span><span class="tag tag-blue">GitHub Actions</span><span class="tag tag-blue">ESLint</span>
       <span class="tag tag-amber">JIRA</span><span class="tag tag-amber">Confluence</span><span class="tag tag-amber">ADB</span><span class="tag tag-amber">Logcat</span>
@@ -493,7 +513,7 @@
   <div class="container">
     <div class="section-eyebrow">// career</div>
     <h2 class="section-title">경력</h2>
-    <p class="section-desc" style="margin-bottom:3.5rem;">4년 6개월간 실전에서 쌓은 QA 엔지니어링 경험입니다.</p>
+    <p class="section-desc">4년 6개월간 실전에서 쌓은 QA 엔지니어링 경험입니다.</p>
     <div class="career-timeline reveal">
       <div class="timeline-entry">
         <div class="timeline-dot"></div>
@@ -526,9 +546,9 @@
 <section id="contact">
   <div class="container">
     <div class="contact-card reveal">
-      <div class="section-eyebrow" style="margin-bottom:.5rem;">// contact</div>
+      <div class="section-eyebrow">// contact</div>
       <h2 class="section-title">함께 일해요</h2>
-      <p style="color:var(--muted);font-size:.95rem;margin-top:.5rem;line-height:1.8;">QA 감각을 가진 개발자를 찾고 계신다면,<br/>서울·경기 전지역 근무 가능합니다.</p>
+      <p style="color:var(--muted);font-size:var(--fs-md);margin-top:var(--space-2);line-height:1.8;">QA 감각을 가진 개발자를 찾고 계신다면,<br/>서울·경기 전지역 근무 가능합니다.</p>
       <div class="contact-links">
         <a href="mailto:sughjd9@gmail.com" class="contact-link primary">✉ 이메일 보내기</a>
         <a href="https://github.com/leesolgi" target="_blank" rel="noopener" class="contact-link">
@@ -559,6 +579,29 @@
 </footer>
 
 <script>
+  // MOBILE NAV
+  (function () {
+    const toggle = document.getElementById('navToggle');
+    const list = document.getElementById('navList');
+    function closeMenu() {
+      list.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', '메뉴 열기');
+      toggle.textContent = '☰';
+    }
+    function openMenu() {
+      list.classList.add('open');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', '메뉴 닫기');
+      toggle.textContent = '✕';
+    }
+    toggle.addEventListener('click', () => {
+      list.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    list.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    window.addEventListener('resize', () => { if (window.innerWidth > 680) closeMenu(); });
+  })();
+
   // THEME
   const root = document.documentElement;
   const btn = document.getElementById('themeToggle');
