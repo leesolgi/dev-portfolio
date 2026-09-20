@@ -41,7 +41,7 @@
 | MockOTT 자동화 테스트 | Python · Selenium · pytest · GitHub Actions | 완료 (TC 18개 전체 통과) | [github.com/leesolgi/ott_automation](https://github.com/leesolgi/ott_automation) |
 | 전자 계산기 | JavaScript · HTML/CSS (바이브코딩) | 완료 | [github.com/leesolgi/calculator](https://github.com/leesolgi/calculator) |
 | QA 포트폴리오 사이트 | HTML/CSS/JS · GitHub Pages | 배포 완료 | [leesolgi.github.io/qa-portfolio-solji](https://leesolgi.github.io/qa-portfolio-solji/) |
-| 조합 테스트 케이스 생성기 | Python · Selenium · Pairwise | 진행중 (2026-09-08~09-12 제작) | [빌드로그(진행 상황)](https://claude.ai/code/artifact/5471e17c-9679-4564-9c67-fa748ed6897c) |
+| 조합 테스트 케이스 생성기 | Python · Streamlit · Selenium · pytest · Pairwise | 배포 완료 | [GitHub](https://github.com/leesolgi/combo-test-generator) · [앱 보기](https://combo-test-generator-mnjmhhqzsjhoxxcejls2fd.streamlit.app/) · [빌드로그](https://claude.ai/code/artifact/5471e17c-9679-4564-9c67-fa748ed6897c) |
 
 ---
 
